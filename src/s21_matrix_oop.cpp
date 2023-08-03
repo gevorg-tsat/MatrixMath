@@ -39,3 +39,54 @@ S21Matrix::~S21Matrix() {
     cols = 0;
     matrix = nullptr;
 }
+
+void S21Matrix::sumMatrix(const S21Matrix& other) {
+    if (rows != other.rows || cols != other.cols)
+        throw std::invalid_argument("Not equal matrix sizes");
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
+            matrix[i][j] = matrix[i][j] + other.matrix[i][j];
+}
+
+bool S21Matrix::eqMatrix(const S21Matrix& other) {
+    if (rows != other.rows || cols != other.cols)
+        return false;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (fabs(matrix[i][j] - other.matrix[i][j]) > EPS_MATRIX_EQ)
+                return false;
+        }
+    }
+    return true;
+}
+
+void S21Matrix::subMatrix(const S21Matrix& other) {
+    if (rows != other.rows || cols != other.cols)
+        throw std::invalid_argument("Not equal matrix sizes");
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
+            matrix[i][j] = matrix[i][j] - other.matrix[i][j];
+}
+
+void S21Matrix::mulNumber(const double num) {
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
+            matrix[i][j] = matrix[i][j] * num;
+}
+
+void S21Matrix::mulMatrix(const S21Matrix& other) {
+    if (A->columns != B->rows)
+        ;
+    if (s21_create_matrix(A->rows, B->columns, result)) return INCORRECT_MATRIX;
+
+    for (int i = 0; i < A->rows; i++) {
+        for (int j = 0; j < B->columns; j++) {
+        result->matrix[i][j] = 0;
+        for (int k = 0; k < B->rows; k++) {
+            result->matrix[i][j] += A->matrix[i][k] * B->matrix[k][j];
+        }
+        }
+    }
+    return OK;
+
+}

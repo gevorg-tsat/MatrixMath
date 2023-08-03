@@ -1,25 +1,27 @@
 #include <exception>
 #include <stdexcept>
+#include <math.h>
+
+#define EPS_MATRIX_EQ 1e-07
 
 class S21Matrix {
     private:
-        // Attributes
         int rows, cols;
         double **matrix;
 
     public:
-        S21Matrix();                                                // default constructor
-        S21Matrix(int rows, int cols);                              // parameterized constructor
-        S21Matrix(const S21Matrix& other);                              // copy cnstructor
-        S21Matrix(S21Matrix&& other) noexcept;                                   // move cnstructor
-        ~S21Matrix();             // Destructor
+        S21Matrix();
+        S21Matrix(int rows, int cols);
+        S21Matrix(const S21Matrix& other);
+        S21Matrix(S21Matrix&& other) noexcept;
+        ~S21Matrix();
 
         void sumMatrix(const S21Matrix& other); 
         bool eqMatrix(const S21Matrix& other);
-        void sumMatrix(const S21Matrix& other);
         void subMatrix(const S21Matrix& other);
         void mulNumber(const double num);
         void mulMatrix(const S21Matrix& other);
+
         S21Matrix transpose();
         S21Matrix calcComplements();
         double determinant();
