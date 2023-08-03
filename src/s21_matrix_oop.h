@@ -1,16 +1,17 @@
-
+#include <exception>
+#include <stdexcept>
 
 class S21Matrix {
     private:
         // Attributes
         int rows, cols;
-        double **matrix_;
+        double **matrix;
 
     public:
         S21Matrix();                                                // default constructor
         S21Matrix(int rows, int cols);                              // parameterized constructor
         S21Matrix(const S21Matrix& other);                              // copy cnstructor
-        S21Matrix(S21Matrix&& other);                                   // move cnstructor
+        S21Matrix(S21Matrix&& other) noexcept;                                   // move cnstructor
         ~S21Matrix();             // Destructor
 
         void sumMatrix(const S21Matrix& other); 
