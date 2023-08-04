@@ -5,10 +5,6 @@
 #define EPS_MATRIX_EQ 1e-07
 
 class S21Matrix {
-    private:
-        int rows, cols;
-        double **matrix;
-
     public:
         S21Matrix();
         S21Matrix(int rows, int cols);
@@ -16,8 +12,13 @@ class S21Matrix {
         S21Matrix(S21Matrix&& other);
         ~S21Matrix();
 
+        int getRows();
+        int getColumns();
+        void setRows(int rows);
+        void setColumns(int columns);
+
         void sumMatrix(const S21Matrix& other); 
-        bool eqMatrix(const S21Matrix& other);
+        bool eqMatrix(const S21Matrix& other) const;
         void subMatrix(const S21Matrix& other);
         void mulNumber(const double num);
         void mulMatrix(const S21Matrix& other);
@@ -43,4 +44,12 @@ class S21Matrix {
         bool operator==(const S21Matrix &other) const;
         double &operator()(int i, int j);
         const double &operator()(int i, int j) const;
+    
+    protected:
+        S21Matrix minorMatrix(int row, int col) const;
+
+    private:
+        int rows_, cols_;
+        double **matrix_;
+
 };
