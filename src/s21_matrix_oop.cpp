@@ -15,6 +15,7 @@ S21Matrix::S21Matrix(int rows, int cols)  {
 }
 
 S21Matrix::S21Matrix(const S21Matrix& other) : rows(other.rows), cols(other.cols) {
+    // std::cout << "Copy constructor called\n";
     matrix = new double* [rows]();
     for (int i = 0; i < rows; i++) {
         matrix[i] = new double[cols];
@@ -24,14 +25,16 @@ S21Matrix::S21Matrix(const S21Matrix& other) : rows(other.rows), cols(other.cols
             matrix[i][j] = other.matrix[i][j];
 }
 
-S21Matrix::S21Matrix(S21Matrix&& other) noexcept : rows(other.rows), cols(other.cols),
+S21Matrix::S21Matrix(S21Matrix&& other) : rows(other.rows), cols(other.cols),
                                         matrix(other.matrix) {
+    // std::cout << "Move constructor called\n";
     other.rows = 0;
     other.cols = 0;
     other.matrix = nullptr;
 }
 
 S21Matrix::~S21Matrix() {
+    // std::cout << "destructor called\n";
     for (int i = 0; i < rows; i++)
         delete[] matrix[i];
     delete[] matrix;
@@ -75,18 +78,44 @@ void S21Matrix::mulNumber(const double num) {
 }
 
 void S21Matrix::mulMatrix(const S21Matrix& other) {
-    if (A->columns != B->rows)
-        ;
-    if (s21_create_matrix(A->rows, B->columns, result)) return INCORRECT_MATRIX;
-
-    for (int i = 0; i < A->rows; i++) {
-        for (int j = 0; j < B->columns; j++) {
-        result->matrix[i][j] = 0;
-        for (int k = 0; k < B->rows; k++) {
-            result->matrix[i][j] += A->matrix[i][k] * B->matrix[k][j];
-        }
+    if (this->cols != other.rows)
+        throw std::logic_error("Amount of colummns of this matrix is not equal to amount of rows of the other matrix");
+    S21Matrix result(this->rows, other.cols);
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < other.cols; j++) {
+            result.matrix[i][j] = 0;
+            for (int k = 0; k < other.rows; k++) {
+                result.matrix[i][j] += this->matrix[i][k] * other.matrix[k][j];
+            }
         }
     }
-    return OK;
+    *this = result;
 
+}
+
+void S21Matrix::operator=(const S21Matrix& other) {
+    // std::cout << "Copy oper called\n";
+    this->~S21Matrix();
+    (S21Matrix) (other);
+}
+
+
+void S21Matrix::operator=(S21Matrix&& other) {
+    // std::cout << "Move oper called\n";
+    (S21Matrix) (std::move(other));
+}
+
+S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
+    // std::cout << "plus oper called\n";
+    S21Matrix result(*this);
+    result.sumMatrix(other);
+    return result;
+}
+
+
+int main() {
+    S21Matrix m1(2, 2), m2(2, 2);
+    S21Matrix m3;
+    m3 = m1 + m2;
+    return 0;
 }

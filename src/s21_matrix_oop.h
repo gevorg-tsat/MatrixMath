@@ -1,6 +1,6 @@
-#include <exception>
 #include <stdexcept>
 #include <math.h>
+#include <iostream>
 
 #define EPS_MATRIX_EQ 1e-07
 
@@ -13,7 +13,7 @@ class S21Matrix {
         S21Matrix();
         S21Matrix(int rows, int cols);
         S21Matrix(const S21Matrix& other);
-        S21Matrix(S21Matrix&& other) noexcept;
+        S21Matrix(S21Matrix&& other);
         ~S21Matrix();
 
         void sumMatrix(const S21Matrix& other); 
@@ -37,8 +37,8 @@ class S21Matrix {
         S21Matrix &operator*=(const S21Matrix& other);
         S21Matrix &operator*=(double num);
 
-        S21Matrix &operator=(const S21Matrix &other);
-        S21Matrix &operator=(S21Matrix &&other) noexcept;
+        void operator=(const S21Matrix& other);
+        void operator=(S21Matrix&& other);
 
         bool operator==(const S21Matrix &other) const;
         double &operator()(int i, int j);
