@@ -223,7 +223,7 @@ S21Matrix S21Matrix::minorMatrix(int row, int col) const {
             }
         }
     }
-
+    return result;
 }
 
 S21Matrix S21Matrix::calcComplements() {
