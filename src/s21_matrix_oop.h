@@ -2,8 +2,9 @@
 #define _SRC_S21_MATRIX_OOP_H_
 #include <stdexcept>
 #include <math.h>
+#include <utility>
 #include <iostream>
-
+#include <algorithm>
 
 class S21Matrix {
     public:

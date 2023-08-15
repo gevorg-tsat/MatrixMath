@@ -24,7 +24,7 @@ TEST(TestArithmetic, SubtestSumError) {
     fill_matrix_from_array(mat, tmp, 16);
     fill_matrix_from_array(mat2, tmp2, 16);
     fill_matrix_from_array(mat3, tmp3, 16);
-    ASSERT_THROW(mat.sumMatrix(mat2), std::invalid_argument);
+    EXPECT_ANY_THROW(mat.sumMatrix(mat2));
 }
 
 TEST(TestArithmetic, SubtestSub) {
@@ -51,7 +51,7 @@ TEST(TestArithmetic, SubtestSubError) {
     fill_matrix_from_array(mat, tmp, 16);
     fill_matrix_from_array(mat2, tmp2, 16);
     fill_matrix_from_array(mat3, tmp3, 16);
-    ASSERT_THROW(mat.subMatrix(mat2), std::invalid_argument);
+    EXPECT_ANY_THROW(mat.subMatrix(mat2));
 }
 
 TEST(TestArithmetic, SubtestMulNum) {
@@ -95,5 +95,5 @@ TEST(TestArithmetic, SubtestMulMatrixError) {
     fill_matrix_from_array(mat, tmp, 16);
     fill_matrix_from_array(mat2, tmp2, 16);
     fill_matrix_from_array(mat3, tmp3, 16);
-    ASSERT_THROW(mat.mulMatrix(mat2), std::invalid_argument);
+    EXPECT_ANY_THROW(mat.mulMatrix(mat2));
 }

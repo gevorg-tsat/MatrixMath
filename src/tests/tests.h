@@ -5,6 +5,6 @@
 
 #include "../s21_matrix_oop.h"
 
-#endif  // SRC_TESTS_TESTS_H_
-
 void fill_matrix_from_array(S21Matrix &matr, double *arr, int arr_size);
+
+#endif  // SRC_TESTS_TESTS_H_

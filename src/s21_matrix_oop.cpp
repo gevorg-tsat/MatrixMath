@@ -1,7 +1,12 @@
 #include "s21_matrix_oop.h"
 
 S21Matrix::S21Matrix() {
-    S21Matrix(1, 1);
+    this->rows_ = 1;
+    this->cols_ = 1;
+    matrix_ = new double* [rows_]();
+    for (int i = 0; i < rows_; i++) {
+        matrix_[i] = new double[cols_]();
+    }
 }
 
 S21Matrix::S21Matrix(int rows, int cols)  {
@@ -318,6 +323,6 @@ S21Matrix S21Matrix::inverseMatrix() const {
 //     m1(0, 1) = 2;
 //     m1(1, 0) = 3;
 //     m1(1, 1) = 4;
-
+//     std::cout << m3.getRows();
 //     return 0;
 // }

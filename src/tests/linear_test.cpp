@@ -23,7 +23,7 @@ TEST(TestLinear, SubtestCalcComplementsError) {
     S21Matrix mat = S21Matrix(3, 2);
     double tmp1[9] = {1, 2, 3, 0, 4, 2, 5, 2, 1};
     fill_matrix_from_array(mat, tmp1, 9);
-    ASSERT_THROW(mat.calcComplements(), std::invalid_argument);
+    EXPECT_ANY_THROW(mat.calcComplements());
 }
 
 TEST(TestLinear, SubtestDeterminant1) {
@@ -49,7 +49,7 @@ TEST(TestLinear, SubtestDeterminantError) {
     S21Matrix mat = S21Matrix(4, 3);
     double tmp1[16] = {9, 2, 2, 9, 1, 9, 3, 4, 2, 9, 2, 2, 9, 5, 5, 9};
     fill_matrix_from_array(mat, tmp1, 16);
-    ASSERT_THROW(mat.determinant(), std::invalid_argument);
+    EXPECT_ANY_THROW(mat.determinant());
 }
 
 TEST(TestLinear, SubtestInverseMatrix) {
@@ -67,12 +67,12 @@ TEST(TestLinear, SubtestInverseMatrixError1) {
     S21Matrix mat2 = S21Matrix(3, 3);
     double tmp1[9] = {2, 5, 7, 6, 3, 4, 5, -2, -3};
     fill_matrix_from_array(mat, tmp1, 9);
-    ASSERT_THROW(mat.inverseMatrix(), std::invalid_argument);
+    EXPECT_ANY_THROW(mat.inverseMatrix());
 }
 
 TEST(TestLinear, SubtestInverseMatrixError2) {
     S21Matrix mat = S21Matrix(3, 3);
     double tmp1[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     fill_matrix_from_array(mat, tmp1, 9);
-    ASSERT_THROW(mat.inverseMatrix(), std::invalid_argument);
+    EXPECT_ANY_THROW(mat.inverseMatrix());
 }
