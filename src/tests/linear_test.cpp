@@ -38,7 +38,7 @@ TEST(TestLinear, SubtestDeterminant2) {
     double tmp1[16] = {-9, 2, 2, 9, 1, 9, -3, 4, 2, -9, 2, 2, 9, 5, -5, 9};
     fill_matrix_from_array(mat, tmp1, 16);
     double diff = fabs(mat.determinant() - (double)-483);
-    if (diff <= EPS_MATRIX_EQ) {
+    if (diff <= 1e-7) {
         ASSERT_EQ(1, 1);
     } else {
         ASSERT_EQ(1, 0);

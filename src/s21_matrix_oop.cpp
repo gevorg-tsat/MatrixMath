@@ -1,6 +1,8 @@
 #include "s21_matrix_oop.h"
 
-S21Matrix::S21Matrix() : rows_(0), cols_(0), matrix_(nullptr) { }
+S21Matrix::S21Matrix() {
+    S21Matrix(1, 1);
+}
 
 S21Matrix::S21Matrix(int rows, int cols)  {
     if (rows < 1 || cols < 1) {
@@ -43,11 +45,11 @@ S21Matrix::~S21Matrix() {
     matrix_ = nullptr;
 }
 
-int S21Matrix::getRows() {
+int S21Matrix::getRows() const {
     return rows_;
 }
 
-int S21Matrix::getColumns() {
+int S21Matrix::getColumns() const {
     return cols_;
 }
 
@@ -85,7 +87,7 @@ bool S21Matrix::eqMatrix(const S21Matrix& other) const{
         return false;
     for (int i = 0; i < rows_; i++) {
         for (int j = 0; j < cols_; j++) {
-            if (fabs(matrix_[i][j] - other.matrix_[i][j]) > EPS_MATRIX_EQ)
+            if (fabs(matrix_[i][j] - other.matrix_[i][j]) > k_EPS_MATRIX_EQ)
                 return false;
         }
     }
@@ -122,17 +124,19 @@ void S21Matrix::mulMatrix(const S21Matrix& other) {
 
 }
 
-void S21Matrix::operator=(const S21Matrix& other) {
+S21Matrix S21Matrix::operator=(const S21Matrix& other) {
     // std::cout << "Copy oper called\n";
     this->~S21Matrix();
     (S21Matrix) (other);
+    return *this;
 }
 
-void S21Matrix::operator=(S21Matrix&& other) {
+S21Matrix S21Matrix::operator=(S21Matrix&& other) {
     // std::cout << "Move oper called\n";
     std::swap(rows_, other.rows_);
     std::swap(cols_, other.cols_);
     std::swap(matrix_, other.matrix_);
+    return *this;
 }
 
 S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
@@ -199,7 +203,7 @@ const double &S21Matrix::operator()(int i, int j) const {
     return matrix_[i][j];
 }
 
-S21Matrix S21Matrix::transpose() {
+S21Matrix S21Matrix::transpose() const {
     S21Matrix res(cols_, rows_);
     for (int i = 0; i < rows_; i++)
         for (int j = 0; j < cols_; j++)
@@ -226,7 +230,7 @@ S21Matrix S21Matrix::minorMatrix(int row, int col) const {
     return result;
 }
 
-S21Matrix S21Matrix::calcComplements() {
+S21Matrix S21Matrix::calcComplements() const {
     if (cols_ != rows_)
         throw std::logic_error("Complements matrix is defined only for squared matrix.");
     
@@ -249,7 +253,7 @@ S21Matrix S21Matrix::calcComplements() {
 
 }
 
-double S21Matrix::determinant() {
+double S21Matrix::determinant() const {
     if (cols_ != rows_)
         throw std::logic_error("Determinant is defined only for squared matrix.");
     if (cols_ == 0 || rows_ == 0)
@@ -294,22 +298,15 @@ double S21Matrix::determinant() {
 
 }
 
-S21Matrix S21Matrix::inverseMatrix() {
+S21Matrix S21Matrix::inverseMatrix() const {
     if (cols_ != rows_)
         throw std::logic_error("Inverse matrix is defined only for squared matrix.");
     
     double det = determinant();
-    if (fabs(det) < EPS_MATRIX_EQ) {
+    if (fabs(det) < k_EPS_MATRIX_EQ) {
         throw std::logic_error("Determinant equals 0, Inverse matrix is undefined");
     }
-    S21Matrix result;
-    result = calcComplements();
-    result = result.transpose();
-    for (int i = 0; i < result.rows_; i++)
-        for (int j = 0; j < result.cols_; j++)
-            result.matrix_[i][j] *= (1 / det);
-    return result;
-
+    return calcComplements().transpose() * (1/det);
 }
 
 // int main() {
