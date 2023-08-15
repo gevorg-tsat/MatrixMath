@@ -10,7 +10,7 @@ s21_matrix_oop.a:
 	rm *.o
 
 test: rebuild
-	$(CC) $(CFLAGS) -lgtest test.cpp s21_matrix_oop.a -o test
+	$(CC) $(CFLAGS) tests/*.cpp s21_matrix_oop.cpp -o test -lgtest
 	./test
 	rm test
 

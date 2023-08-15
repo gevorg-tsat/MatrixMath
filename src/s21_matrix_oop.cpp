@@ -27,7 +27,7 @@ S21Matrix::S21Matrix(const S21Matrix& other) : rows_(other.rows_), cols_(other.c
             matrix_[i][j] = other.matrix_[i][j];
 }
 
-S21Matrix::S21Matrix(S21Matrix&& other) : rows_(other.rows_), cols_(other.cols_),
+S21Matrix::S21Matrix(S21Matrix&& other) noexcept : rows_(other.rows_), cols_(other.cols_),
                                         matrix_(other.matrix_) {
     // std::cout << "Move constructor called\n";
     other.rows_ = 0;
@@ -45,11 +45,11 @@ S21Matrix::~S21Matrix() {
     matrix_ = nullptr;
 }
 
-int S21Matrix::getRows() const {
+int S21Matrix::getRows() const noexcept {
     return rows_;
 }
 
-int S21Matrix::getColumns() const {
+int S21Matrix::getColumns() const noexcept {
     return cols_;
 }
 
@@ -102,7 +102,7 @@ void S21Matrix::subMatrix(const S21Matrix& other) {
             matrix_[i][j] = matrix_[i][j] - other.matrix_[i][j];
 }
 
-void S21Matrix::mulNumber(const double num) {
+void S21Matrix::mulNumber(const double num) noexcept {
     for (int i = 0; i < rows_; i++)
         for (int j = 0; j < cols_; j++)
             matrix_[i][j] = matrix_[i][j] * num;
@@ -131,7 +131,7 @@ S21Matrix S21Matrix::operator=(const S21Matrix& other) {
     return *this;
 }
 
-S21Matrix S21Matrix::operator=(S21Matrix&& other) {
+S21Matrix S21Matrix::operator=(S21Matrix&& other) noexcept {
     // std::cout << "Move oper called\n";
     std::swap(rows_, other.rows_);
     std::swap(cols_, other.cols_);
@@ -178,12 +178,12 @@ S21Matrix &S21Matrix::operator*=(const S21Matrix& other) {
     return *this;
 }
 
-S21Matrix &S21Matrix::operator*=(double num) {
+S21Matrix &S21Matrix::operator*=(double num) noexcept {
     mulNumber(num);
     return *this;
 }
 
-bool S21Matrix::operator==(const S21Matrix &other) const {
+bool S21Matrix::operator==(const S21Matrix &other) const noexcept {
     return eqMatrix(other);
 }
 
@@ -203,7 +203,7 @@ const double &S21Matrix::operator()(int i, int j) const {
     return matrix_[i][j];
 }
 
-S21Matrix S21Matrix::transpose() const {
+S21Matrix S21Matrix::transpose() const noexcept {
     S21Matrix res(cols_, rows_);
     for (int i = 0; i < rows_; i++)
         for (int j = 0; j < cols_; j++)

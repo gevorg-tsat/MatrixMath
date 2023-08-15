@@ -7,10 +7,10 @@ TEST(TestArithmetic, SubtestSum) {
     double tmp[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     double tmp2[16] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     double tmp3[16] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
-    mat.MatrixFill(tmp);
-    mat2.MatrixFill(tmp2);
-    mat3.MatrixFill(tmp3);
-    mat.SumMatrix(mat2);
+    fill_matrix_from_array(mat, tmp, 16);
+    fill_matrix_from_array(mat2, tmp2, 16);
+    fill_matrix_from_array(mat3, tmp3, 16);
+    mat.sumMatrix(mat2);
     ASSERT_EQ(mat == mat3, true);
 }
 
@@ -21,10 +21,10 @@ TEST(TestArithmetic, SubtestSumError) {
     double tmp[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     double tmp2[16] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     double tmp3[16] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
-    mat.MatrixFill(tmp);
-    mat2.MatrixFill(tmp2);
-    mat3.MatrixFill(tmp3);
-    ASSERT_THROW(mat.SumMatrix(mat2), std::invalid_argument);
+    fill_matrix_from_array(mat, tmp, 16);
+    fill_matrix_from_array(mat2, tmp2, 16);
+    fill_matrix_from_array(mat3, tmp3, 16);
+    ASSERT_THROW(mat.sumMatrix(mat2), std::invalid_argument);
 }
 
 TEST(TestArithmetic, SubtestSub) {
@@ -34,10 +34,10 @@ TEST(TestArithmetic, SubtestSub) {
     double tmp[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     double tmp2[16] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     double tmp3[16] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-    mat.MatrixFill(tmp);
-    mat2.MatrixFill(tmp2);
-    mat3.MatrixFill(tmp3);
-    mat.SubMatrix(mat2);
+    fill_matrix_from_array(mat, tmp, 16);
+    fill_matrix_from_array(mat2, tmp2, 16);
+    fill_matrix_from_array(mat3, tmp3, 16);
+    mat.subMatrix(mat2);
     ASSERT_EQ(mat == mat3, true);
 }
 
@@ -48,10 +48,10 @@ TEST(TestArithmetic, SubtestSubError) {
     double tmp[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     double tmp2[16] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     double tmp3[16] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
-    mat.MatrixFill(tmp);
-    mat2.MatrixFill(tmp2);
-    mat3.MatrixFill(tmp3);
-    ASSERT_THROW(mat.SubMatrix(mat2), std::invalid_argument);
+    fill_matrix_from_array(mat, tmp, 16);
+    fill_matrix_from_array(mat2, tmp2, 16);
+    fill_matrix_from_array(mat3, tmp3, 16);
+    ASSERT_THROW(mat.subMatrix(mat2), std::invalid_argument);
 }
 
 TEST(TestArithmetic, SubtestMulNum) {
@@ -62,11 +62,11 @@ TEST(TestArithmetic, SubtestMulNum) {
     double tmp[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     double tmp2[16] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     double tmp3[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    mat.MatrixFill(tmp);
-    mat2.MatrixFill(tmp2);
-    mat3.MatrixFill(tmp3);
-    mat.MultNumber(0);
-    ASSERT_EQ(mat.EqMatrix(mat3), true);
+    fill_matrix_from_array(mat, tmp, 16);
+    fill_matrix_from_array(mat2, tmp2, 16);
+    fill_matrix_from_array(mat3, tmp3, 16);
+    mat.mulNumber(0);
+    ASSERT_EQ(mat.eqMatrix(mat3), true);
 }
 
 TEST(TestArithmetic, SubtestMulMatrix) {
@@ -77,10 +77,10 @@ TEST(TestArithmetic, SubtestMulMatrix) {
     double tmp[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     double tmp2[16] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     double tmp3[16] = {30, 36, 42, 66, 81, 96, 102, 126, 150};
-    mat.MatrixFill(tmp);
-    mat2.MatrixFill(tmp2);
-    mat3.MatrixFill(tmp3);
-    mat.MulMatrix(mat);
+    fill_matrix_from_array(mat, tmp, 16);
+    fill_matrix_from_array(mat2, tmp2, 16);
+    fill_matrix_from_array(mat3, tmp3, 16);
+    mat.mulMatrix(mat);
     ASSERT_EQ(mat == mat3, true);
 }
 
@@ -92,8 +92,8 @@ TEST(TestArithmetic, SubtestMulMatrixError) {
     double tmp[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     double tmp2[16] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     double tmp3[16] = {30, 36, 42, 66, 81, 96, 102, 126, 150};
-    mat.MatrixFill(tmp);
-    mat2.MatrixFill(tmp2);
-    mat3.MatrixFill(tmp3);
-    ASSERT_THROW(mat.MulMatrix(mat2), std::invalid_argument);
+    fill_matrix_from_array(mat, tmp, 16);
+    fill_matrix_from_array(mat2, tmp2, 16);
+    fill_matrix_from_array(mat3, tmp3, 16);
+    ASSERT_THROW(mat.mulMatrix(mat2), std::invalid_argument);
 }

@@ -1,3 +1,5 @@
+#ifndef _SRC_S21_MATRIX_OOP_H_
+#define _SRC_S21_MATRIX_OOP_H_
 #include <stdexcept>
 #include <math.h>
 #include <iostream>
@@ -48,8 +50,10 @@ class S21Matrix {
         S21Matrix minorMatrix(int row, int col) const;
 
     private:
-        static const double k_EPS_MATRIX_EQ = 1e-07;
+        const double k_EPS_MATRIX_EQ = 1e-07;
         int rows_, cols_;
         double **matrix_;
 
 };
+
+#endif // _SRC_S21_MATRIX_OOP_H_
