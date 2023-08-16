@@ -138,6 +138,8 @@ S21Matrix S21Matrix::operator=(const S21Matrix& other) {
 
 S21Matrix S21Matrix::operator=(S21Matrix&& other) noexcept {
     // std::cout << "Move oper called\n";
+    if (this == &other)
+        return *this;
     std::swap(rows_, other.rows_);
     std::swap(cols_, other.cols_);
     std::swap(matrix_, other.matrix_);
@@ -162,7 +164,7 @@ S21Matrix S21Matrix::operator*(const S21Matrix& other) const {
     result.mulMatrix(other);
     return result;
 }
-S21Matrix S21Matrix::operator*(double num) const {
+S21Matrix S21Matrix::operator*(double num) const noexcept{
     S21Matrix result(*this);
     result.mulNumber(num);
     return result;
