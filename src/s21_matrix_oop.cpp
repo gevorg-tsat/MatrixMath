@@ -1,4 +1,5 @@
 #include "s21_matrix_oop.h"
+#include <iostream>
 
 S21Matrix::S21Matrix() {
     this->rows_ = 1;
@@ -194,7 +195,7 @@ bool S21Matrix::operator==(const S21Matrix &other) const noexcept {
     return eqMatrix(other);
 }
 
-double &S21Matrix::operator()(int i, int j) {
+double &S21Matrix::operator()(int i, int j) & {
     if (i >= rows_ || j >= cols_)
         throw std::out_of_range("index or indices are out of range of matrix_");
     if (i < 0 || j < 0)
@@ -202,7 +203,7 @@ double &S21Matrix::operator()(int i, int j) {
     return matrix_[i][j];
 }
 
-const double &S21Matrix::operator()(int i, int j) const {
+const double &S21Matrix::operator()(int i, int j) const & {
     if (i >= rows_ || j >= cols_)
         throw std::out_of_range("index or indices are out of range of matrix_");
     if (i < 0 || j < 0)
@@ -315,16 +316,3 @@ S21Matrix S21Matrix::inverseMatrix() const {
     }
     return calcComplements().transpose() * (1/det);
 }
-
-// int main() {
-//     S21Matrix m1(2, 2), m2(2, 2);
-//     S21Matrix m3;
-//     // m3 = m1 + m2; //move
-//     // m3 = m2; // copy
-//     m1(0,0) = 1;
-//     m1(0, 1) = 2;
-//     m1(1, 0) = 3;
-//     m1(1, 1) = 4;
-//     std::cout << m3.getRows();
-//     return 0;
-// }

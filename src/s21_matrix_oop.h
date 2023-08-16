@@ -43,8 +43,8 @@ class S21Matrix {
         S21Matrix operator=(S21Matrix&& other) noexcept;
 
         bool operator==(const S21Matrix &other) const noexcept;
-        double &operator()(int i, int j);
-        const double &operator()(int i, int j) const;
+        double &operator()(int i, int j) &;
+        const double &operator()(int i, int j) const &;
     
     protected:
         S21Matrix minorMatrix(int row, int col) const;
