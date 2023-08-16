@@ -20,7 +20,6 @@ S21Matrix::S21Matrix(int rows, int cols)  {
 }
 
 S21Matrix::S21Matrix(const S21Matrix& other) : rows_(other.rows_), cols_(other.cols_) {
-    // std::cout << "Copy constructor called\n";
     matrix_ = new double* [rows_]();
     for (int i = 0; i < rows_; i++) {
         matrix_[i] = new double[cols_];
@@ -32,14 +31,12 @@ S21Matrix::S21Matrix(const S21Matrix& other) : rows_(other.rows_), cols_(other.c
 
 S21Matrix::S21Matrix(S21Matrix&& other) noexcept : rows_(other.rows_), cols_(other.cols_),
                                         matrix_(other.matrix_) {
-    // std::cout << "Move constructor called\n";
     other.rows_ = 0;
     other.cols_ = 0;
     other.matrix_ = nullptr;
 }
 
 S21Matrix::~S21Matrix() {
-    // std::cout << "destructor called\n";
     for (int i = 0; i < rows_; i++)
         delete[] matrix_[i];
     delete[] matrix_;
@@ -128,14 +125,12 @@ void S21Matrix::mulMatrix(const S21Matrix& other) {
 }
 
 S21Matrix S21Matrix::operator=(const S21Matrix& other) {
-    // std::cout << "Copy oper called\n";
     this->~S21Matrix();
     (S21Matrix) (other);
     return *this;
 }
 
 S21Matrix S21Matrix::operator=(S21Matrix&& other) noexcept {
-    // std::cout << "Move oper called\n";
     if (this == &other)
         return *this;
     std::swap(rows_, other.rows_);
@@ -145,7 +140,6 @@ S21Matrix S21Matrix::operator=(S21Matrix&& other) noexcept {
 }
 
 S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
-    // std::cout << "plus oper called\n";
     S21Matrix result(*this);
     result.sumMatrix(other);
     return result;
