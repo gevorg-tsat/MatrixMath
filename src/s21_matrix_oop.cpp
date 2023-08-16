@@ -4,9 +4,7 @@ S21Matrix::S21Matrix() {
     this->rows_ = 1;
     this->cols_ = 1;
     matrix_ = new double* [rows_]();
-    for (int i = 0; i < rows_; i++) {
-        matrix_[i] = new double[cols_]();
-    }
+    matrix_[0] = new double[cols_]();
 }
 
 S21Matrix::S21Matrix(int rows, int cols)  {
@@ -164,10 +162,15 @@ S21Matrix S21Matrix::operator*(const S21Matrix& other) const {
     result.mulMatrix(other);
     return result;
 }
-S21Matrix S21Matrix::operator*(double num) const noexcept{
+
+S21Matrix S21Matrix::operator*(double num) const {
     S21Matrix result(*this);
     result.mulNumber(num);
     return result;
+}
+
+S21Matrix operator*(double number, const S21Matrix& other) {
+    return other * number;
 }
 
 S21Matrix &S21Matrix::operator+=(const S21Matrix& other) {

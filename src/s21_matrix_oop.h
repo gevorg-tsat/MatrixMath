@@ -32,7 +32,8 @@ class S21Matrix {
         S21Matrix operator+(const S21Matrix& other) const;
         S21Matrix operator-(const S21Matrix& other) const;
         S21Matrix operator*(const S21Matrix& other) const;
-        S21Matrix operator*(double num) const noexcept;
+        S21Matrix operator*(double num) const;
+        friend S21Matrix operator*(double number, const S21Matrix& other);
 
         S21Matrix &operator+=(const S21Matrix& other);
         S21Matrix &operator-=(const S21Matrix& other);
