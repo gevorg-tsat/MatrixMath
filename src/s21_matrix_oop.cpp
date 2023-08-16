@@ -1,5 +1,4 @@
 #include "s21_matrix_oop.h"
-#include <iostream>
 
 S21Matrix::S21Matrix() {
     this->rows_ = 1;
