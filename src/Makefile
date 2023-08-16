@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -std=c++17 -Wall -Werror -Wextra -lstdc++
-SOURCES=$(wildcard tests/*.cpp)
+TEST_SOURCES=$(wildcard tests/*.cpp)
 all: s21_matrix_oop.a
 
 s21_matrix_oop.a:
@@ -10,7 +10,7 @@ s21_matrix_oop.a:
 	rm *.o
 
 test: rebuild
-	$(CC) $(CFLAGS) -lgtest $(SOURCES) s21_matrix_oop.cpp -o test
+	$(CC) $(CFLAGS) -lgtest $(TEST_SOURCES) s21_matrix_oop.a -o test
 	./test
 	rm test
 
